@@ -402,6 +402,11 @@
                 return nil
             }
             let identifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+            // Sleep Proxy numeric prefixes describe server preference, not device
+            // identity. They are shared by many hosts and must never merge TVs.
+            if identifier.range(of: #"^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.[0-9]+$"#, options: .regularExpression) != nil {
+                return nil
+            }
             return identifier.isEmpty ? nil : identifier
         }
 

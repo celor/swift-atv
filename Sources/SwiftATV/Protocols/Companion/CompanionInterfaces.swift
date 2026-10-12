@@ -321,7 +321,7 @@ public struct CompanionRemoteControl: RemoteControl, Sendable {
 
             if action == .hold {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
-            } else {
+            } else if action == .doubleTap {
                 try? await Task.sleep(nanoseconds: 20_000_000)
             }
 
